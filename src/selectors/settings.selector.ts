@@ -6,10 +6,7 @@ const getSettings = (state: AppState) => state.settings;
 const makeSelectSettings = () =>
   createSelector(
     getSettings,
-    settings => {
-      console.log('Calculations...');
-      return settings.hello;
-    }
+    settings => settings
   );
 
 export { makeSelectSettings };

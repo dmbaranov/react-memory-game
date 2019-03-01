@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
-import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { GameDifficulty } from '@/types/settings';
+import { SettingsFormStyles, SubmitButton, RadioGroup } from './styles';
+import { ISettingsFormComponentProps } from './types';
 
-const SettingsForm: React.FC<any> = () => {
+const SettingsForm: React.FC<ISettingsFormComponentProps> = ({ onSubmit }) => {
   const [form, updateForm] = useState({
     name: '',
-    difficulty: 'medium'
+    difficulty: 'medium' as GameDifficulty
   });
 
   function updateFormState(e: React.ChangeEvent<HTMLInputElement | any>) {
@@ -19,27 +21,32 @@ const SettingsForm: React.FC<any> = () => {
 
   function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log('Submitted', form);
+    onSubmit(form);
   }
 
   return (
-    <form onSubmit={handleFormSubmit}>
-      <TextField
-        label="Name"
-        name="name"
-        value={form.name}
-        onChange={updateFormState}
-      />
-      <RadioGroup
-        name="difficulty"
-        value={form.difficulty}
-        onChange={updateFormState}
-      >
-        <FormControlLabel value="easy" control={<Radio />} label="Easy" />
-        <FormControlLabel value="medium" control={<Radio />} label="Medium" />
-        <FormControlLabel value="hard" control={<Radio />} label="Hard" />
-      </RadioGroup>
-    </form>
+    <SettingsFormStyles>
+      <form onSubmit={handleFormSubmit}>
+        <TextField
+          label="Name"
+          name="name"
+          value={form.name}
+          onChange={updateFormState}
+        />
+        <RadioGroup
+          name="difficulty"
+          value={form.difficulty}
+          onChange={updateFormState}
+        >
+          <FormControlLabel value="easy" control={<Radio />} label="Easy" />
+          <FormControlLabel value="medium" control={<Radio />} label="Medium" />
+          <FormControlLabel value="hard" control={<Radio />} label="Hard" />
+        </RadioGroup>
+        <SubmitButton type="submit" variant="contained">
+          Start
+        </SubmitButton>
+      </form>
+    </SettingsFormStyles>
   );
 };
 

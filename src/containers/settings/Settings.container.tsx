@@ -1,17 +1,31 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { bindActionCreators, Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import Layout from '@/components/layout';
 import SettingsForm from '@/components/settings-form';
+import { saveSettings } from '@/actions/settings.actions';
+import { IGameSettings } from '@/types/settings';
+import { ISettingsProps } from './types';
 
-class Settings extends Component<any, any> {
+class Settings extends Component<ISettingsProps, any> {
+  handleFormSubmit = (settings: IGameSettings) => {
+    this.props.saveSettings(settings);
+  };
+
   render() {
     return (
-      <>
-        <div>Settings container</div>
-        <SettingsForm />
-        <Link to="/game">Start</Link>
-      </>
+      <Layout>
+        <SettingsForm onSubmit={this.handleFormSubmit} />
+      </Layout>
     );
   }
 }
 
-export default Settings;
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  saveSettings: bindActionCreators(saveSettings, dispatch)
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Settings);
