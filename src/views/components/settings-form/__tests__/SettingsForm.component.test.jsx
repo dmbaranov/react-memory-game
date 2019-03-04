@@ -1,5 +1,7 @@
 import '@/core/utils/setup-tests';
 import React from 'react';
+import createRouterContext from 'react-router-test-context';
+import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -11,8 +13,15 @@ describe('SettingsForm tests', () => {
   let onSubmit;
 
   beforeAll(() => {
+    const context = createRouterContext();
+    const childContextTypes = {
+      router: PropTypes.object
+    };
     onSubmit = jest.fn();
-    wrapper = mount(<SettingsForm onSubmit={onSubmit} />);
+    wrapper = mount(<SettingsForm onSubmit={onSubmit} />, {
+      context,
+      childContextTypes
+    });
   });
 
   it('Submit button should be disabled if name not presented', () => {

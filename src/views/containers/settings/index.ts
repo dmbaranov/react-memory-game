@@ -1,2 +1,1 @@
-import Settings from './Settings.container';
-export default Settings;
+export { default } from './Settings.container';

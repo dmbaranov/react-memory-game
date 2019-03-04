@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { GameDifficulty } from '@/core/settings/types';
 import { SettingsFormStyles, SubmitButton, RadioGroup } from './styles';
-import { ISettingsFormComponentProps } from './types';
+import { IProps } from './types';
 
-const SettingsForm: React.FC<ISettingsFormComponentProps> = ({ onSubmit }) => {
+const SettingsForm: React.FC<IProps> = ({ onSubmit }) => {
+  const [settingsSaved, saveSettings] = useState(false);
   const [form, updateForm] = useState({
     name: '',
     difficulty: 'medium' as GameDifficulty
@@ -22,6 +24,11 @@ const SettingsForm: React.FC<ISettingsFormComponentProps> = ({ onSubmit }) => {
   function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     onSubmit(form);
+    saveSettings(true);
+  }
+
+  if (settingsSaved) {
+    return <Redirect to="/game" />;
   }
 
   return (

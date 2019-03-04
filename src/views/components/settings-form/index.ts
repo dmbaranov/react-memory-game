@@ -1,2 +1,1 @@
-import SettingsForm from './SettingsForm.component';
-export default SettingsForm;
+export { default } from './SettingsForm.component';
