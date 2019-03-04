@@ -1,6 +1,6 @@
 import { RouteProps } from 'react-router-dom';
-import Game from '@/containers/game';
-import Settings from '@/containers/settings';
+import Game from '@/views/containers/game';
+import Settings from '@/views/containers/settings';
 
 const routes: RouteProps[] = [
   {

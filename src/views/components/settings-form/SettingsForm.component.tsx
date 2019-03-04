@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { GameDifficulty } from '@/types/settings';
+import { GameDifficulty } from '@/core/settings/types';
 import { SettingsFormStyles, SubmitButton, RadioGroup } from './styles';
 import { ISettingsFormComponentProps } from './types';
 

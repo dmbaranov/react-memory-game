@@ -1,4 +1,4 @@
-import { makeSelectSettings } from '../index';
+import { makeSelectSettings } from '../selectors';
 
 describe('Settings selector tests', () => {
   it('Should return correct settings', () => {

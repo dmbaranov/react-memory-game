@@ -5,9 +5,9 @@ import { Provider } from 'react-redux';
 import JssProvider from 'react-jss/lib/JssProvider';
 import { create } from 'jss';
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
-import App from './App';
+import App from './views/App';
 import * as serviceWorker from './serviceWorker';
-import store from './store';
+import store from '@/core/store';
 
 const generateClassName = createGenerateClassName();
 const jss = create({

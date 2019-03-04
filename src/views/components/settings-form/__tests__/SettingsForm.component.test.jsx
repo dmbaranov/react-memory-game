@@ -1,4 +1,4 @@
-import '@/utils/setup-tests';
+import '@/core/utils/setup-tests';
 import React from 'react';
 import { mount } from 'enzyme';
 import TextField from '@material-ui/core/TextField';

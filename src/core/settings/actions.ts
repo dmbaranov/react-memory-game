@@ -1,8 +1,5 @@
-import {
-  SettingsConstants,
-  SettingsConstantsType
-} from '@/constants/settings.constants';
-import { IGameSettings } from '@/types/settings';
+import { SettingsConstants, SettingsConstantsType } from './constants';
+import { IGameSettings } from './types';
 
 export interface ISettingsAction {
   type: SettingsConstantsType;

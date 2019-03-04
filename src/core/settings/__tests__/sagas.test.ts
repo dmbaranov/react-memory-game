@@ -1,7 +1,7 @@
 import { expectSaga } from 'redux-saga-test-plan';
-import settingsReducer from '@/reducers/settings';
-import { SettingsConstants } from '@/constants/settings.constants';
-import { saveSettings } from '../index';
+import settingsReducer from '../reducer';
+import { SettingsConstants } from '../constants';
+import { saveSettings } from '../sagas';
 
 describe('Settings saga tests', () => {
   it('Should save settings successfully', async () => {

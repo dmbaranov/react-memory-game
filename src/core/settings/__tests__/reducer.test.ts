@@ -1,5 +1,5 @@
-import { SettingsConstants } from '@/constants/settings.constants';
-import reducer from '../index';
+import { SettingsConstants } from '../constants';
+import reducer from '../reducer';
 
 describe('Settings reducer', () => {
   it('Should return initial state', () => {

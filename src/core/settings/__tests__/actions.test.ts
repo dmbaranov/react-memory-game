@@ -1,6 +1,6 @@
-import { SettingsConstants } from '@/constants/settings.constants';
-import { GameDifficulty } from '@/types/settings';
-import { saveSettings } from '..';
+import { SettingsConstants } from '../constants';
+import { GameDifficulty } from '../types';
+import { saveSettings } from '../actions';
 
 describe('Settings actions tests', () => {
   it('Should create correct action to save settings ', () => {

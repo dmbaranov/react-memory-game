@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import Layout from '@/components/layout';
-import SettingsForm from '@/components/settings-form';
-import { saveSettings } from '@/actions/settings';
-import { IGameSettings } from '@/types/settings';
+import Layout from '@/views/components/layout';
+import SettingsForm from '@/views/components/settings-form';
+import { saveSettings } from '@/core/settings/actions';
+import { IGameSettings } from '@/core/settings/types';
 import { ISettingsProps } from './types';
 
 class Settings extends Component<ISettingsProps, any> {

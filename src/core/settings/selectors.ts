@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { AppState } from '@/reducers';
+import { AppState } from '../reducer';
 
 const getSettings = (state: AppState) => state.settings;
 
