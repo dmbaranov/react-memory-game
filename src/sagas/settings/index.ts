@@ -1,8 +1,8 @@
 import { takeLatest, put } from 'redux-saga/effects';
-import { ISettingsAction } from '@/actions/settings.actions';
+import { ISettingsAction } from '@/actions/settings';
 import { SettingsConstants } from '@/constants/settings.constants';
 
-function* saveSettings(action: ISettingsAction) {
+export function* saveSettings(action: ISettingsAction) {
   const { ...settings } = action.payload;
 
   yield put({

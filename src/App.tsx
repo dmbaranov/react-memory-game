@@ -9,7 +9,7 @@ import {
 import routes from '@/routes';
 import GlobalStyles from '@/styles';
 import { AppState } from '@/reducers';
-import { makeSelectSettings } from '@/selectors/settings.selector';
+import { makeSelectSettings } from '@/selectors/settings';
 
 interface IAppProps extends RouteComponentProps {
   settings: any;

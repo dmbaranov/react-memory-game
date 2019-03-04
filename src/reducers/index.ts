@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import settings, { SettingsStore } from './settings.reducer';
+import settings, { SettingsStore } from './settings';
 
 export interface AppState {
   settings: SettingsStore;

@@ -1,4 +1,4 @@
-import { ISettingsAction } from '@/actions/settings.actions';
+import { ISettingsAction } from '@/actions/settings';
 import { SettingsConstants } from '@/constants/settings.constants';
 
 const initialState = {

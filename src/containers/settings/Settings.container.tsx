@@ -3,7 +3,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import Layout from '@/components/layout';
 import SettingsForm from '@/components/settings-form';
-import { saveSettings } from '@/actions/settings.actions';
+import { saveSettings } from '@/actions/settings';
 import { IGameSettings } from '@/types/settings';
 import { ISettingsProps } from './types';
 

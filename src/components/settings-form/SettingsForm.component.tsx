@@ -28,6 +28,7 @@ const SettingsForm: React.FC<ISettingsFormComponentProps> = ({ onSubmit }) => {
     <SettingsFormStyles>
       <form onSubmit={handleFormSubmit}>
         <TextField
+          data-testid="nameInput"
           label="Name"
           name="name"
           value={form.name}
@@ -42,7 +43,12 @@ const SettingsForm: React.FC<ISettingsFormComponentProps> = ({ onSubmit }) => {
           <FormControlLabel value="medium" control={<Radio />} label="Medium" />
           <FormControlLabel value="hard" control={<Radio />} label="Hard" />
         </RadioGroup>
-        <SubmitButton type="submit" variant="contained">
+        <SubmitButton
+          type="submit"
+          variant="contained"
+          data-testid="submitButton"
+          disabled={form.name.length === 0}
+        >
           Start
         </SubmitButton>
       </form>
