@@ -1,8 +1,6 @@
 export interface ICard {
   value: number;
   color: string;
-}
-
-export interface IGameField {
-  field: ICard[];
+  id?: number;
+  solved?: boolean;
 }

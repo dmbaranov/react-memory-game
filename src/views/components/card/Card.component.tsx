@@ -1,15 +1,27 @@
 import React from 'react';
+import { StyledCard } from './styles';
 import { IProps } from './types';
 
-const Card: React.FC<IProps> = ({ onOpen, card }) => {
+const Card: React.FC<IProps> = ({
+  onOpen,
+  card,
+  index,
+  isOpened,
+  isVisible
+}) => {
   const handleCardOpen = () => {
-    onOpen(card);
+    onOpen(index);
   };
 
   return (
-    <div style={{ background: card.color }} onClick={handleCardOpen}>
-      C, {card.value}
-    </div>
+    <StyledCard
+      color={card.color}
+      isVisible={isVisible}
+      isOpened={isOpened}
+      onClick={handleCardOpen}
+    >
+      {card.value} {card.id}
+    </StyledCard>
   );
 };
 

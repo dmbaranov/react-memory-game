@@ -17,20 +17,26 @@ const CARDS: ICard[] = [
   }
 ];
 
+// TODO: improve it
 export function generateField(difficulty: GameDifficulty): ICard[] {
   const amount = mapDifficultyToCells[difficulty].reduce((a, b) => a * b, 1);
-  const result = [];
+  const result: ICard[] = [];
   let cardIndex = 0;
 
   for (let i = 0; i < amount / 2; i++) {
-    result.push(CARDS[cardIndex]);
-    result.push(CARDS[cardIndex]);
+    result.push({ ...CARDS[cardIndex], id: i });
+    result.push({ ...CARDS[cardIndex], id: i + 1 });
 
     if (cardIndex === CARDS.length - 1) {
       cardIndex = 0;
     } else {
       cardIndex++;
     }
+  }
+
+  for (let i = 0; i < result.length; i++) {
+    const newIndex = Math.floor(Math.random() * result.length);
+    [result[i], result[newIndex]] = [result[newIndex], result[i]];
   }
 
   return result;

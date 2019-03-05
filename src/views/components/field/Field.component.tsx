@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { ICard } from '@/core/game/types';
+import React, { useState, useEffect } from 'react';
 import Card from '@/views/components/card';
 import { Grid } from './styles';
 import { IProps } from './types';
@@ -16,16 +15,43 @@ const Field: React.FC<IProps> = ({ difficulty }) => {
     return generateField(difficulty);
   };
   const [field, updateField] = useState(createField);
+  const [openedCards, updateOpenedCards] = useState([] as number[]);
 
-  const openCard = (card: ICard) => {
-    console.log('Opened card', card);
+  useEffect(
+    () => {
+      if (openedCards.length === 2) {
+        const [a, b] = openedCards;
+        if (field[a].value === field[b].value) {
+          const updatedField = [...field];
+          updatedField[a].solved = true;
+          updatedField[b].solved = true;
+          updateField(updatedField);
+        }
+
+        updateOpenedCards([]);
+      }
+    },
+    [openedCards]
+  );
+
+  const openCard = (index: number) => {
+    updateOpenedCards([...openedCards, index]);
   };
 
   const renderCells = () => {
     const result = [];
 
     for (let i = 0; i < field.length; i++) {
-      result.push(<Card onOpen={openCard} card={field[i]} key={i} />);
+      result.push(
+        <Card
+          index={i}
+          isOpened={openedCards.includes(i)}
+          isVisible={!Boolean(field[i].solved)}
+          onOpen={openCard}
+          card={field[i]}
+          key={i}
+        />
+      );
     }
 
     return result;
