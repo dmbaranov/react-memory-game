@@ -14,18 +14,18 @@ const SettingsForm: React.FC<IProps> = ({ onSubmit }) => {
     difficulty: 'medium' as GameDifficulty
   });
 
-  function updateFormState(e: React.ChangeEvent<HTMLInputElement | any>) {
+  const updateFormState = (e: React.ChangeEvent<HTMLInputElement | any>) => {
     updateForm({
       ...form,
       [e.target.name]: e.target.value
     });
-  }
+  };
 
-  function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit(form);
     saveSettings(true);
-  }
+  };
 
   if (settingsSaved) {
     return <Redirect to="/game" />;

@@ -25,5 +25,4 @@ const mapStateToProps = () => {
   });
 };
 
-// export default Game;
 export default connect(mapStateToProps)(Game as any);

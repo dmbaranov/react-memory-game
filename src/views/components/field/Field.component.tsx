@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { ICard } from '@/core/game/types';
 import Card from '@/views/components/card';
 import { Grid } from './styles';
 import { IProps } from './types';
+import { generateField } from './utils';
 
 export const mapDifficultyToCells = {
   easy: [4, 3],
@@ -10,16 +12,24 @@ export const mapDifficultyToCells = {
 };
 
 const Field: React.FC<IProps> = ({ difficulty }) => {
-  function renderCells() {
-    const result = [];
-    const amount = mapDifficultyToCells[difficulty].reduce((a, b) => a * b, 1);
+  const createField = () => {
+    return generateField(difficulty);
+  };
+  const [field, updateField] = useState(createField);
 
-    for (let i = 0; i < amount; i++) {
-      result.push(<Card />);
+  const openCard = (card: ICard) => {
+    console.log('Opened card', card);
+  };
+
+  const renderCells = () => {
+    const result = [];
+
+    for (let i = 0; i < field.length; i++) {
+      result.push(<Card onOpen={openCard} card={field[i]} key={i} />);
     }
 
     return result;
-  }
+  };
 
   return (
     <>

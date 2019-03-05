@@ -1,7 +1,7 @@
 import { ISettingsAction } from './actions';
 import { SettingsConstants } from './constants';
 
-const initialState = {
+export const initialState = {
   name: '',
   difficulty: 'hard'
 };

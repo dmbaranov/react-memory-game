@@ -5,7 +5,7 @@ describe('Settings reducer', () => {
   it('Should return initial state', () => {
     expect(reducer(undefined, {} as any)).toEqual({
       name: '',
-      difficulty: ''
+      difficulty: 'hard'
     });
   });
 
