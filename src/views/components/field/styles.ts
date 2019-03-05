@@ -5,12 +5,13 @@ import { IGridProps } from './types';
 export const Grid = styled.div`
   display: grid;
 
+  grid-gap: 15px;
   grid-template-columns: repeat(
     ${(props: IGridProps) => mapDifficultyToCells[props.difficulty][0]},
-    50px
+    100px
   );
   grid-template-rows: repeat(
     ${(props: IGridProps) => mapDifficultyToCells[props.difficulty][1]},
-    50px
+    100px
   );
 `;

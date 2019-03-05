@@ -4,15 +4,15 @@ import { mapDifficultyToCells } from './Field.component';
 
 const CARDS: ICard[] = [
   {
-    color: 'red',
+    color: '#e53935',
     value: 1
   },
   {
-    color: 'blue',
+    color: '#1e88e5',
     value: 2
   },
   {
-    color: 'green',
+    color: '#43a047',
     value: 3
   }
 ];

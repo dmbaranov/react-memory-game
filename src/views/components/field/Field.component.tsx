@@ -10,7 +10,7 @@ export const mapDifficultyToCells = {
   hard: [6, 5]
 };
 
-const Field: React.FC<IProps> = ({ difficulty }) => {
+const Field: React.FC<IProps> = ({ difficulty, onGameOver }) => {
   const createField = () => {
     return generateField(difficulty);
   };
@@ -34,8 +34,23 @@ const Field: React.FC<IProps> = ({ difficulty }) => {
     [openedCards]
   );
 
-  const openCard = (index: number) => {
-    updateOpenedCards([...openedCards, index]);
+  useEffect(
+    () => {
+      const remainingCards = field.filter(card => !card.solved);
+
+      if (remainingCards.length === 0) {
+        onGameOver();
+      }
+    },
+    [field]
+  );
+
+  const toggleCard = (index: number) => {
+    if (!openedCards.includes(index)) {
+      updateOpenedCards([...openedCards, index]);
+    } else {
+      updateOpenedCards([...openedCards].filter(item => item !== index));
+    }
   };
 
   const renderCells = () => {
@@ -47,7 +62,7 @@ const Field: React.FC<IProps> = ({ difficulty }) => {
           index={i}
           isOpened={openedCards.includes(i)}
           isVisible={!Boolean(field[i].solved)}
-          onOpen={openCard}
+          onClick={toggleCard}
           card={field[i]}
           key={i}
         />

@@ -3,7 +3,7 @@ import { SettingsConstants } from './constants';
 
 export const initialState = {
   name: '',
-  difficulty: 'hard'
+  difficulty: 'easy'
 };
 
 export type SettingsStore = Readonly<typeof initialState>;

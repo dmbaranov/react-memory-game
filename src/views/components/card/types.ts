@@ -3,7 +3,7 @@ import { ICard } from '@/core/game/types';
 export interface IProps {
   card: ICard;
   index: number;
-  onOpen: (index: number) => void;
+  onClick: (index: number) => void;
   isOpened: boolean;
   isVisible: boolean;
 }

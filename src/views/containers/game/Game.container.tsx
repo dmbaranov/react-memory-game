@@ -7,11 +7,18 @@ import { AppState } from '@/core/reducer';
 import { IProps } from './types';
 
 class Game extends Component<IProps, any> {
+  handleGameOver = () => {
+    console.log('Game over...');
+  };
+
   render() {
     const { settings } = this.props;
     return (
       <Layout>
-        <Field difficulty={settings.difficulty} />
+        <Field
+          difficulty={settings.difficulty}
+          onGameOver={this.handleGameOver}
+        />
       </Layout>
     );
   }
