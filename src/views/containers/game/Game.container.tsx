@@ -6,6 +6,7 @@ import Field from '@/views/components/field';
 import { makeSelectSettings } from '@/core/settings/selectors';
 import { executeGameOver } from '@/core/game/actions';
 import { AppState } from '@/core/reducer';
+import { IFieldGameData } from '@/views/components/field/types';
 import { IProps, IState } from './types';
 
 class Game extends Component<IProps, IState> {
@@ -23,7 +24,7 @@ class Game extends Component<IProps, IState> {
     });
   };
 
-  handleGameOver = (gameData: any) => {
+  handleGameOver = (gameData: IFieldGameData) => {
     const now = new Date().getTime();
     const playTime = Math.floor((now - this.state.startTime) / 1000);
 
@@ -35,6 +36,7 @@ class Game extends Component<IProps, IState> {
 
   render() {
     const { settings } = this.props;
+
     return (
       <Layout>
         <Field

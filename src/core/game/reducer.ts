@@ -1,8 +1,9 @@
 import { IGameAction } from './actions';
 import { GameConstants } from './constants';
+import { IGameData } from './types';
 
 export const initialState = {
-  gameData: {}
+  gameData: {} as IGameData
 };
 
 export type GameStore = Readonly<typeof initialState>;
@@ -13,7 +14,6 @@ export default function gameReducer(
 ) {
   switch (action.type) {
     case GameConstants.EXECUTE_GAME_OVER_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         gameData: { ...action.payload.gameData }

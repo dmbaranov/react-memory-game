@@ -1,8 +1,12 @@
 import { GameDifficulty } from '@/core/settings/types';
 
+export interface IFieldGameData {
+  moves: number;
+}
+
 export interface IProps {
   difficulty: GameDifficulty;
-  onGameOver: (gameData: any) => void;
+  onGameOver: (gameData: IFieldGameData) => void;
   onGameStarted: (time: number) => void;
 }
 

@@ -4,3 +4,8 @@ export interface ICard {
   id?: number;
   solved?: boolean;
 }
+
+export interface IGameData {
+  playTime: number;
+  moves: number;
+}
