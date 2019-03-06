@@ -2,7 +2,7 @@ import { IGameAction } from './actions';
 import { GameConstants } from './constants';
 
 export const initialState = {
-  field: []
+  gameData: {}
 };
 
 export type GameStore = Readonly<typeof initialState>;
@@ -12,10 +12,11 @@ export default function gameReducer(
   action: IGameAction
 ) {
   switch (action.type) {
-    case GameConstants.GENERATE_GAME_FIELD_SUCCESS:
+    case GameConstants.EXECUTE_GAME_OVER_SUCCESS:
+      console.log(action.payload);
       return {
         ...state,
-        field: action.payload.field
+        gameData: { ...action.payload.gameData }
       };
 
     default:

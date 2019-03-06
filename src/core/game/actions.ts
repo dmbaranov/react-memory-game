@@ -5,8 +5,11 @@ export interface IGameAction {
   payload?: any;
 }
 
-export function generateField(): IGameAction {
+export function executeGameOver(gameData: any): IGameAction {
   return {
-    type: GameConstants.GENERATE_GAME_FIELD
+    type: GameConstants.EXECUTE_GAME_OVER,
+    payload: {
+      gameData
+    }
   };
 }

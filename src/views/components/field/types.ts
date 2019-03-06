@@ -2,7 +2,8 @@ import { GameDifficulty } from '@/core/settings/types';
 
 export interface IProps {
   difficulty: GameDifficulty;
-  onGameOver: () => void;
+  onGameOver: (gameData: any) => void;
+  onGameStarted: (time: number) => void;
 }
 
 export interface IGridProps {

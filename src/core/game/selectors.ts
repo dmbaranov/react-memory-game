@@ -3,10 +3,10 @@ import { AppState } from '../reducer';
 
 const getGame = (state: AppState) => state.game;
 
-const makeSelectGameField = () =>
+const makeSelectGameData = () =>
   createSelector(
     getGame,
-    game => game.field
+    game => game.gameData
   );
 
-export { makeSelectGameField };
+export { makeSelectGameData };

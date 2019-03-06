@@ -2,21 +2,21 @@ import { takeLatest, put } from 'redux-saga/effects';
 import { IGameAction } from './actions';
 import { GameConstants } from './constants';
 
-export function* generateField() {
-  const field: any[] = [1, 2, 3];
+export function* executeGameOver(action: IGameAction) {
+  const { gameData } = action.payload;
 
   yield put({
-    type: GameConstants.GENERATE_GAME_FIELD_SUCCESS,
+    type: GameConstants.EXECUTE_GAME_OVER_SUCCESS,
     payload: {
-      field
+      gameData
     }
   });
 }
 
 function* gameSaga() {
   yield takeLatest<IGameAction>(
-    GameConstants.GENERATE_GAME_FIELD,
-    generateField
+    GameConstants.EXECUTE_GAME_OVER,
+    executeGameOver
   );
 }
 

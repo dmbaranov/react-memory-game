@@ -11,15 +11,20 @@ export const mapDifficultyToCells = {
 };
 
 // Toggle cards, etc.
-const ACTION_TIMEOUT = 2000;
+const ACTION_TIMEOUT = 500;
 
-const Field: React.FC<IProps> = ({ difficulty, onGameOver }) => {
+const Field: React.FC<IProps> = ({ difficulty, onGameStarted, onGameOver }) => {
   const createField = () => {
-    return generateField(difficulty);
+    const field = generateField(difficulty);
+    const now = new Date().getTime();
+    onGameStarted(now);
+
+    return field;
   };
   const [isBusy, setIsBusy] = useState(false); // If action is in progress
   const [field, updateField] = useState(createField);
   const [openedCards, updateOpenedCards] = useState([] as number[]);
+  const [moves, increaseMoves] = useState(0);
 
   useEffect(
     () => {
@@ -51,7 +56,9 @@ const Field: React.FC<IProps> = ({ difficulty, onGameOver }) => {
     const remainingCards = field.filter(card => !card.solved);
 
     if (remainingCards.length === 0) {
-      onGameOver();
+      onGameOver({
+        moves
+      });
     }
   };
 
@@ -71,6 +78,7 @@ const Field: React.FC<IProps> = ({ difficulty, onGameOver }) => {
         }, ACTION_TIMEOUT);
       }
 
+      increaseMoves(moves + 1);
       setTimeout(() => {
         updateOpenedCards([]);
         setIsBusy(false);
