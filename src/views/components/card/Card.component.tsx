@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { StyledCard, Front, Back } from './styles';
-// import { Container, Back, Card as Wtf, Face } from './styles';
 import { IProps } from './types';
 
 const Card: React.FC<IProps> = ({
@@ -8,32 +7,39 @@ const Card: React.FC<IProps> = ({
   card,
   index,
   isOpened,
-  isVisible
+  isVisible,
+  isBusy
 }) => {
-  const [opened, toggleOpened] = useState(false);
+  const [showFront, toggleShowFront] = useState(false);
 
   useEffect(
     () => {
       setTimeout(() => {
-        toggleOpened(isOpened);
+        toggleShowFront(isOpened);
       }, 250);
     },
     [isOpened]
   );
 
   const handleCardOpen = () => {
+    if (isBusy) {
+      return;
+    }
+
     onClick(index);
 
     setTimeout(() => {
-      toggleOpened(!opened);
+      toggleShowFront(!showFront);
     }, 250);
   };
 
-  // return (
-  //   <Container>
-  //     <Wtf>{isOpened ? <Face /> : <Back />}</Wtf>
-  //   </Container>
-  // );
+  const displayContent = () => {
+    if (showFront) {
+      return <Front color={card.color}>{card.value}</Front>;
+    }
+    return <Back>?</Back>;
+  };
+
   return (
     <StyledCard
       color={card.color}
@@ -41,7 +47,7 @@ const Card: React.FC<IProps> = ({
       isOpened={isOpened}
       onClick={handleCardOpen}
     >
-      {opened ? <Front color={card.color}>{card.value}</Front> : <Back>?</Back>}
+      {displayContent()}
     </StyledCard>
   );
 };

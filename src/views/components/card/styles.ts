@@ -1,21 +1,17 @@
 import styled, { keyframes } from 'styled-components';
 import { IStyledCardProps } from './types';
 
-const pulse = keyframes`
+const backgroundPulse = keyframes`
   0% {
-    transform: rotate(0);
-  } 
-  
-  33% {
-    transform: rotate(-5deg);
+  background: #f5f5f5;
   }
-
-  66% {
-  transform: rotate(5deg);
+  
+  50% {
+  background: #e0e0e0;
   }
   
   100% {
-  transform: rotate(0);
+  background: #f5f5f5;
   }
 `;
 
@@ -40,18 +36,35 @@ const closeAnimation = keyframes`
   }
 `;
 
+const fadeOutAnimation = keyframes`
+  0% {
+    opacity: 1;
+  }
+  
+  100% {
+  opacity: 0;
+  }
+`;
+
 export const StyledCard = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  visibility: ${(props: IStyledCardProps) =>
-    props.isVisible ? 'visible' : 'hidden'};
   animation: ${(props: IStyledCardProps) =>
-      props.isOpened ? closeAnimation : openAnimation}
-    1s forwards;
+        props.isVisible ? 'none' : fadeOutAnimation}
+      1s forwards,
+    ${(props: IStyledCardProps) =>
+        props.isOpened ? closeAnimation : openAnimation}
+      1s forwards;
 `;
+
+// visibility: ${(props: IStyledCardProps) =>
+//   props.isVisible ? 'visible' : 'hidden'};
+// animation: ${(props: IStyledCardProps) =>
+//     props.isOpened ? closeAnimation : openAnimation}
+//   1s forwards;
 
 const CardContent = styled.div`
   width: 100%;
@@ -67,7 +80,7 @@ export const Back = styled(CardContent)`
   background: #eeeeee;
 
   &:hover {
-    animation: ${pulse} 1s forwards infinite linear;
+    animation: ${backgroundPulse} 1s forwards infinite linear;
   }
 `;
 

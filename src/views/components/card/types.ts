@@ -6,6 +6,7 @@ export interface IProps {
   onClick: (index: number) => void;
   isOpened: boolean;
   isVisible: boolean;
+  isBusy: boolean;
 }
 
 export interface IStyledCardProps {

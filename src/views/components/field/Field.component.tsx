@@ -10,46 +10,71 @@ export const mapDifficultyToCells = {
   hard: [6, 5]
 };
 
+// Toggle cards, etc.
+const ACTION_TIMEOUT = 2000;
+
 const Field: React.FC<IProps> = ({ difficulty, onGameOver }) => {
   const createField = () => {
     return generateField(difficulty);
   };
+  const [isBusy, setIsBusy] = useState(false); // If action is in progress
   const [field, updateField] = useState(createField);
   const [openedCards, updateOpenedCards] = useState([] as number[]);
 
   useEffect(
     () => {
-      if (openedCards.length === 2) {
-        const [a, b] = openedCards;
-        if (field[a].value === field[b].value) {
-          const updatedField = [...field];
-          updatedField[a].solved = true;
-          updatedField[b].solved = true;
-          updateField(updatedField);
-        }
-
-        updateOpenedCards([]);
-      }
+      handleOpenedCards();
     },
     [openedCards]
   );
 
   useEffect(
     () => {
-      const remainingCards = field.filter(card => !card.solved);
-
-      if (remainingCards.length === 0) {
-        onGameOver();
-      }
+      checkForGameOver();
     },
     [field]
   );
 
   const toggleCard = (index: number) => {
+    if (isBusy) {
+      return;
+    }
+
     if (!openedCards.includes(index)) {
       updateOpenedCards([...openedCards, index]);
     } else {
       updateOpenedCards([...openedCards].filter(item => item !== index));
+    }
+  };
+
+  const checkForGameOver = () => {
+    const remainingCards = field.filter(card => !card.solved);
+
+    if (remainingCards.length === 0) {
+      onGameOver();
+    }
+  };
+
+  const handleOpenedCards = () => {
+    if (openedCards.length === 2) {
+      setIsBusy(true);
+
+      const [a, b] = openedCards;
+      if (field[a].value === field[b].value) {
+        // This will copy only first layer of cell objects, but it will do because there're no nested objects
+        const newField = field.map((cell: any) => ({ ...cell }));
+        newField[a].solved = true;
+        newField[b].solved = true;
+
+        setTimeout(() => {
+          updateField(newField);
+        }, ACTION_TIMEOUT);
+      }
+
+      setTimeout(() => {
+        updateOpenedCards([]);
+        setIsBusy(false);
+      }, ACTION_TIMEOUT);
     }
   };
 
@@ -60,10 +85,11 @@ const Field: React.FC<IProps> = ({ difficulty, onGameOver }) => {
       result.push(
         <Card
           index={i}
-          isOpened={openedCards.includes(i)}
+          isOpened={field[i].solved || openedCards.includes(i)}
           isVisible={!Boolean(field[i].solved)}
           onClick={toggleCard}
           card={field[i]}
+          isBusy={isBusy}
           key={i}
         />
       );
