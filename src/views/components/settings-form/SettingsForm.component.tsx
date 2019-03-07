@@ -53,8 +53,8 @@ const SettingsForm: React.FC<IProps> = ({ onSubmit }) => {
         <SubmitButton
           type="submit"
           variant="contained"
-          data-testid="submitButton"
           disabled={form.name.length === 0}
+          onClick={handleFormSubmit}
         >
           Start
         </SubmitButton>

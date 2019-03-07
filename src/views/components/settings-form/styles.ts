@@ -6,7 +6,7 @@ export const SettingsFormStyles = styled.div`
   text-align: center;
 `;
 
-export const SubmitButton = styled(Button)`
+export const SubmitButton: any = styled(Button)`
   margin-top: 20px;
 `;
 

@@ -37,19 +37,13 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@types/enzyme": "^3.9.0",
-    "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/react-jss": "^8.6.3",
     "@types/react-redux": "^7.0.1",
     "@types/react-router-dom": "^4.3.1",
     "@types/styled-components": "^4.1.11",
-    "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.10.0",
-    "jest-environment-enzyme": "^7.0.1",
-    "jest-enzyme": "^7.0.1",
-    "prop-types": "^15.7.2",
     "react-app-rewired": "^2.1.0",
     "react-router-test-context": "^0.1.0",
+    "react-testing-library": "^6.0.0",
     "redux-saga-test-plan": "^4.0.0-beta.2"
   },
   "jest": {

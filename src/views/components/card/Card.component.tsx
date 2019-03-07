@@ -42,6 +42,7 @@ const Card: React.FC<IProps> = ({
 
   return (
     <StyledCard
+      data-testid="wrapper"
       color={card.color}
       isVisible={isVisible}
       isOpened={isOpened}

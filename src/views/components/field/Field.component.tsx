@@ -48,6 +48,7 @@ const Field: React.FC<IProps> = ({ difficulty, onGameStarted, onGameOver }) => {
     if (!openedCards.includes(index)) {
       updateOpenedCards([...openedCards, index]);
     } else {
+      // Same card was clicked again, so we remove it
       updateOpenedCards([...openedCards].filter(item => item !== index));
     }
   };

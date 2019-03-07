@@ -1,58 +1,67 @@
-import '@/core/utils/setup-tests';
 import React from 'react';
-import createRouterContext from 'react-router-test-context';
-import PropTypes from 'prop-types';
-import { mount } from 'enzyme';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { MemoryRouter, Redirect as MockRedirect } from 'react-router-dom';
+import { render, act, fireEvent, cleanup } from 'react-testing-library';
 import SettingsForm from '../SettingsForm.component';
-import { SubmitButton } from '../styles';
 
-describe('SettingsForm tests', () => {
-  let wrapper;
-  let onSubmit;
+jest.mock('react-router-dom', () => {
+  const RouterMocks = jest.requireActual('react-router-dom');
 
-  beforeAll(() => {
-    const context = createRouterContext();
-    const childContextTypes = {
-      router: PropTypes.object
-    };
-    onSubmit = jest.fn();
-    wrapper = mount(<SettingsForm onSubmit={onSubmit} />, {
-      context,
-      childContextTypes
-    });
+  return {
+    ...RouterMocks,
+    Redirect: jest.fn().mockImplementation(() => {
+      return <span>Redirect</span>;
+    })
+  };
+});
+
+const setup = () => {
+  const onSubmit = jest.fn();
+
+  const utils = render(
+    <MemoryRouter>
+      <SettingsForm onSubmit={onSubmit} />
+    </MemoryRouter>
+  );
+
+  const submitButton = utils.getByText('Start');
+  const nameInput = utils.getByTestId('nameInput');
+
+  return {
+    onSubmit,
+    submitButton,
+    nameInput,
+    ...utils
+  };
+};
+
+afterEach(() => {
+  MockRedirect.mockClear();
+  cleanup();
+});
+
+describe('SettingsForm test', () => {
+  it('Button should be disabled if username is empty', () => {
+    const { submitButton } = setup();
+    expect(submitButton.parentNode.disabled).toBe(true);
   });
 
-  it('Submit button should be disabled if name not presented', () => {
-    expect(wrapper.find(SubmitButton)).toBeDisabled();
-  });
+  it('Test click', () => {
+    const { getByText, onSubmit, nameInput } = setup();
 
-  it('Should submit form with provided name and difficulty', () => {
-    wrapper
-      .find(TextField)
-      .find('input')
-      .simulate('change', {
+    act(() => {
+      fireEvent.change(nameInput.querySelector('input'), {
         target: {
           name: 'name',
-          value: 'Andrew'
+          value: 'qwe'
         }
       });
-
-    wrapper
-      .find(FormControlLabel)
-      .find('input[value="hard"]')
-      .simulate('change', {
-        target: {
-          name: 'difficulty',
-          value: 'hard'
-        }
-      });
-
-    wrapper.find('form').simulate('submit');
-    expect(onSubmit).toHaveBeenCalledWith({
-      name: 'Andrew',
-      difficulty: 'hard'
     });
+
+    act(() => {
+      fireEvent.click(getByText('Start'));
+    });
+
+    expect(onSubmit).toHaveBeenCalled();
+    expect(getByText('Redirect')).not.toBeNull();
   });
 });
