@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import Layout from '@/views/components/layout';
 import Field from '@/views/components/field';
 import { makeSelectSettings } from '@/core/settings/selectors';
+import { makeSelectGameOver } from '@/core/game/selectors';
 import { executeGameOver } from '@/core/game/actions';
 import { AppState } from '@/core/reducer';
 import { IFieldGameData } from '@/views/components/field/types';
 import { IProps, IState } from './types';
 
 class Game extends Component<IProps, IState> {
-  constructor(props: any) {
-    super(props);
-
-    this.state = {
-      startTime: 0
-    };
-  }
+  state = {
+    startTime: 0
+  };
 
   handleGameStart = (time: number) => {
     this.setState({
@@ -28,14 +26,18 @@ class Game extends Component<IProps, IState> {
     const now = new Date().getTime();
     const playTime = Math.floor((now - this.state.startTime) / 1000);
 
-    this.props.executeGameOver({
-      playTime,
-      ...gameData
-    });
+    setTimeout(() => {
+      this.props.executeGameOver({
+        playTime,
+        ...gameData
+      });
+    }, 750);
   };
 
   render() {
-    const { settings } = this.props;
+    const { settings, gameOver } = this.props;
+
+    if (gameOver) return <Redirect to="/over" />;
 
     return (
       <Layout>
@@ -51,9 +53,11 @@ class Game extends Component<IProps, IState> {
 
 const mapStateToProps = () => {
   const getSettings = makeSelectSettings();
+  const getGameOver = makeSelectGameOver();
 
   return (state: AppState) => ({
-    settings: getSettings(state)
+    settings: getSettings(state),
+    gameOver: getGameOver(state)
   });
 };
 

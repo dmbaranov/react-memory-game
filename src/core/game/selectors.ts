@@ -9,4 +9,10 @@ const makeSelectGameData = () =>
     game => game.gameData
   );
 
-export { makeSelectGameData };
+const makeSelectGameOver = () =>
+  createSelector(
+    getGame,
+    game => game.gameOver
+  );
+
+export { makeSelectGameData, makeSelectGameOver };

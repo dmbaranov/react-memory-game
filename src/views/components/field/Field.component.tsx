@@ -11,7 +11,7 @@ export const mapDifficultyToCells = {
 };
 
 // Toggle cards, etc.
-const ACTION_TIMEOUT = 500;
+const ACTION_TIMEOUT = 750;
 
 const Field: React.FC<IProps> = ({ difficulty, onGameStarted, onGameOver }) => {
   const createField = () => {

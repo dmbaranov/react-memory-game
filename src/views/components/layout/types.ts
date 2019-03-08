@@ -13,4 +13,11 @@ export interface ILayoutComponentProps {
     | 'center'
     | 'space-between'
     | 'space-around';
+
+  alignContent?:
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'space-between'
+    | 'space-around';
 }

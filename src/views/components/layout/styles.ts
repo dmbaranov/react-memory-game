@@ -9,5 +9,7 @@ export const LayoutStyles = styled.div`
     props.justifyContent || 'center'};
   align-items: ${(props: ILayoutComponentProps) =>
     props.alignItems || 'center'};
+  align-content: ${(props: ILayoutComponentProps) =>
+    props.alignContent || 'normal'};
   flex-wrap: wrap;
 `;

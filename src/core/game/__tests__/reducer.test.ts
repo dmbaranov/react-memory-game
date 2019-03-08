@@ -4,7 +4,8 @@ import reducer from '../reducer';
 describe('Game reducer', () => {
   it('Should return initial state', () => {
     expect(reducer(undefined, {} as any)).toEqual({
-      gameData: {}
+      gameData: {},
+      gameOver: false
     });
   });
 
@@ -23,7 +24,8 @@ describe('Game reducer', () => {
       gameData: {
         playTime: 5,
         moves: 5
-      }
+      },
+      gameOver: true
     });
   });
 });

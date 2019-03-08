@@ -21,7 +21,8 @@ describe('Game saga tests', () => {
         gameData: {
           playTime: 5,
           moves: 5
-        }
+        },
+        gameOver: true
       })
       .run();
   });

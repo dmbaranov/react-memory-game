@@ -1,6 +1,7 @@
 import { RouteProps } from 'react-router-dom';
 import Game from '@/views/containers/game';
 import Settings from '@/views/containers/settings';
+import Over from '@/views/containers/over';
 
 const routes: RouteProps[] = [
   {
@@ -11,6 +12,10 @@ const routes: RouteProps[] = [
   {
     path: '/game',
     component: Game
+  },
+  {
+    path: '/over',
+    component: Over
   }
 ];
 
