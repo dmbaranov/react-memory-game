@@ -14,7 +14,7 @@ Even thought the project itself is not that difficult, I tried to build it in a 
 
 Worth mentioning that I felt a lot of pain during creating unit tests for the components. The thing is, as of today, Enzyme doesn't always work with Hooks correctly which leads to incorrect testing results. That's why I ended up with react-testing-library, which has some small problems as well (well, maybe I don't know its good enough).
 
-Also, I'd like to say special thanks to @r-park and his [SoundCloud Redux](https://github.com/r-park/soundcloud-redux/) project. That project has awesome structure and this project was inspired by it.
+Also, I'd like to say special thanks to [@r-park](https://github.com/r-park/) and his [SoundCloud Redux](https://github.com/r-park/soundcloud-redux/) project. That project has awesome structure and this project was inspired by it.
 
 ## Contribute
 
