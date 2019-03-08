@@ -38,15 +38,18 @@ class Game extends Component<IProps, IState> {
     const { settings, gameOver } = this.props;
 
     if (gameOver) return <Redirect to="/over" />;
+    if (!settings.name) return <Redirect to="/" />;
 
     return (
-      <Layout>
-        <Field
-          difficulty={settings.difficulty}
-          onGameStarted={this.handleGameStart}
-          onGameOver={this.handleGameOver}
-        />
-      </Layout>
+      <>
+        <Layout vPadding={100} hPadding={100}>
+          <Field
+            difficulty={settings.difficulty}
+            onGameStarted={this.handleGameStart}
+            onGameOver={this.handleGameOver}
+          />
+        </Layout>
+      </>
     );
   }
 }

@@ -14,7 +14,7 @@ class Settings extends Component<ISettingsProps, any> {
 
   render() {
     return (
-      <Layout>
+      <Layout vPadding={100} hPadding={50}>
         <SettingsForm onSubmit={this.handleFormSubmit} />
       </Layout>
     );

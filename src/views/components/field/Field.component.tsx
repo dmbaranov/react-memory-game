@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Button from '@material-ui/core/Button';
 import Card from '@/views/components/card';
-import { Grid } from './styles';
+import { FieldWrapper, Grid, ButtonWrapper } from './styles';
 import { IProps } from './types';
 import { generateField } from './utils';
 
@@ -109,7 +110,14 @@ const Field: React.FC<IProps> = ({ difficulty, onGameStarted, onGameOver }) => {
 
   return (
     <>
-      <Grid difficulty={difficulty}>{renderCells()}</Grid>
+      <FieldWrapper>
+        <Grid difficulty={difficulty}>{renderCells()}</Grid>
+        <ButtonWrapper>
+          <Button variant="contained" color="primary">
+            New game
+          </Button>
+        </ButtonWrapper>
+      </FieldWrapper>
     </>
   );
 };

@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { mapDifficultyToCells } from './Field.component';
 import { IGridProps } from './types';
 
+export const FieldWrapper = styled.div`
+  position: relative;
+`;
+
 export const Grid = styled.div`
   display: grid;
 
@@ -14,4 +18,11 @@ export const Grid = styled.div`
     ${(props: IGridProps) => mapDifficultyToCells[props.difficulty][1]},
     100px
   );
+`;
+
+export const ButtonWrapper = styled.div`
+  position: absolute;
+  top: calc(100% + 35px);
+  width: 100%;
+  text-align: center;
 `;
