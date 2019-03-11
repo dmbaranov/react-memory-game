@@ -13,4 +13,6 @@ export interface IStyledCardProps {
   color: string;
   isOpened: boolean;
   isVisible: boolean;
+  firstRender: boolean;
+  index: number;
 }

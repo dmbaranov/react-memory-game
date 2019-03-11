@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { mapDifficultyToCells } from './Field.component';
 import { IGridProps } from './types';
 
@@ -7,17 +7,19 @@ export const FieldWrapper = styled.div`
 `;
 
 export const Grid = styled.div`
-  display: grid;
+  ${(props: IGridProps) => css`
+    display: grid;
 
-  grid-gap: 15px;
-  grid-template-columns: repeat(
-    ${(props: IGridProps) => mapDifficultyToCells[props.difficulty][0]},
-    100px
-  );
-  grid-template-rows: repeat(
-    ${(props: IGridProps) => mapDifficultyToCells[props.difficulty][1]},
-    100px
-  );
+    grid-gap: 15px;
+    grid-template-columns: repeat(
+      ${mapDifficultyToCells[props.difficulty][0]},
+      100px
+    );
+    grid-template-rows: repeat(
+      ${mapDifficultyToCells[props.difficulty][1]},
+      100px
+    );
+  `};
 `;
 
 export const ButtonWrapper = styled.div`

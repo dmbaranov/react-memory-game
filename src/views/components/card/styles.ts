@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { IStyledCardProps } from './types';
 
 const backgroundPulse = keyframes`
@@ -46,25 +46,54 @@ const fadeOutAnimation = keyframes`
   }
 `;
 
-export const StyledCard = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  animation: ${(props: IStyledCardProps) =>
-        props.isVisible ? 'none' : fadeOutAnimation}
-      1s forwards,
-    ${(props: IStyledCardProps) =>
-        props.isOpened ? closeAnimation : openAnimation}
-      1s forwards;
+const firstRenderAnimation = keyframes`
+  0% {
+    transform: rotateY(-300deg);
+    opacity: 0;
+  }
+  
+  50% {
+    opacity: 1;
+  }
+  
+  100% {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
 `;
 
-// visibility: ${(props: IStyledCardProps) =>
-//   props.isVisible ? 'visible' : 'hidden'};
-// animation: ${(props: IStyledCardProps) =>
-//     props.isOpened ? closeAnimation : openAnimation}
-//   1s forwards;
+const getStyleCardAnimation = (props: IStyledCardProps) => {
+  if (props.firstRender)
+    return css`${firstRenderAnimation} 1s forwards ${props.index / 8}s`;
+
+  if (!props.isVisible)
+    return css`
+      ${fadeOutAnimation} 1s forwards
+    `;
+
+  if (props.isOpened) {
+    return css`
+      ${closeAnimation} 1s forwards
+    `;
+  } else {
+    return css`
+      ${openAnimation} 1s forwards
+    `;
+  }
+};
+
+export const StyledCard = styled.div`
+  ${(props: IStyledCardProps) => css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    animation: ${getStyleCardAnimation(props)};
+
+    opacity: ${props.firstRender ? 0 : 1};
+  `}
+`;
 
 const CardContent = styled.div`
   width: 100%;

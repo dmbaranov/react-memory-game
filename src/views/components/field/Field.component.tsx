@@ -88,6 +88,21 @@ const Field: React.FC<IProps> = ({ difficulty, onGameStarted, onGameOver }) => {
     }
   };
 
+  const startNewGame = () => {
+    // TODO: fix this.. Idk, you have to come up with something as this is ugly and might cause performance issues
+    const now = new Date().getTime();
+    const newField = generateField(difficulty);
+
+    updateField([]);
+    updateOpenedCards([]);
+    setTimeout(() => {
+      setIsBusy(false);
+      updateField(newField);
+      increaseMoves(0);
+      onGameStarted(now);
+    }, ACTION_TIMEOUT);
+  };
+
   const renderCells = () => {
     const result = [];
 
@@ -113,7 +128,7 @@ const Field: React.FC<IProps> = ({ difficulty, onGameStarted, onGameOver }) => {
       <FieldWrapper>
         <Grid difficulty={difficulty}>{renderCells()}</Grid>
         <ButtonWrapper>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={startNewGame}>
             New game
           </Button>
         </ButtonWrapper>
