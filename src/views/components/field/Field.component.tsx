@@ -22,7 +22,7 @@ const Field: React.FC<IProps> = ({ difficulty, onGameStarted, onGameOver }) => {
 
     return field;
   };
-  const [isBusy, setIsBusy] = useState(false); // If action is in progress
+  const [isBusy, setIsBusy] = useState(false); // If card opening is in progress
   const [field, updateField] = useState(createField);
   const [openedCards, updateOpenedCards] = useState([] as number[]);
   const [moves, increaseMoves] = useState(0);

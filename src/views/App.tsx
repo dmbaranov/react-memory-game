@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import CssBaseLine from '@material-ui/core/CssBaseline';
 import routes from '@/core/routes';
 import GlobalStyles from './styles';
 
@@ -11,6 +12,7 @@ class App extends Component<any, any> {
   render() {
     return (
       <>
+        <CssBaseLine />
         <GlobalStyles />
         <Switch>{this.renderRoutes()}</Switch>
       </>
