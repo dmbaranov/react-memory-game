@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import media from 'styled-media-query';
 import { ILayoutComponentProps } from './types';
 
 export const LayoutStyles = styled.div`
@@ -15,11 +16,9 @@ export const LayoutStyles = styled.div`
 
 export const ContentBox: any = styled.div`
   ${(props: ILayoutComponentProps) => css`
-    padding-left: ${(props.vPadding || '50') + 'px'};
-    padding-right: ${(props.vPadding || '50') + 'px'};
-
-    padding-top: ${(props.hPadding || '50') + 'px'};
-    padding-bottom: ${(props.hPadding || '50') + 'px'};
+    ${media.lessThan('small')`padding: 15px;`}
+    ${media.between('small', 'medium')`padding: 50px;`}
+    padding: 100px;
 
     display: flex;
     justify-content: ${props.justifyContent || 'center'};

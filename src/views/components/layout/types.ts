@@ -22,7 +22,4 @@ export interface ILayoutComponentProps {
     | 'space-around';
 
   direction?: 'row' | 'column';
-
-  vPadding?: number;
-  hPadding?: number;
 }

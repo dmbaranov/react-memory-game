@@ -7,15 +7,11 @@ const Layout: React.FC<ILayoutComponentProps> = ({
   alignItems,
   alignContent,
   justifyContent,
-  direction,
-  vPadding,
-  hPadding
+  direction
 }) => {
   return (
     <LayoutStyles>
       <ContentBox
-        vPadding={vPadding}
-        hPadding={hPadding}
         alignItems={alignItems}
         justifyContent={justifyContent}
         alignContent={alignContent}

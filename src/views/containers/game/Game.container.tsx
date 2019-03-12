@@ -42,7 +42,7 @@ class Game extends Component<IProps, IState> {
 
     return (
       <>
-        <Layout vPadding={100} hPadding={100}>
+        <Layout>
           <Field
             difficulty={settings.difficulty}
             onGameStarted={this.handleGameStart}

@@ -19,7 +19,10 @@ const CARDS: ICard[] = [
 
 // TODO: improve it
 export function generateField(difficulty: GameDifficulty): ICard[] {
-  const amount = mapDifficultyToCells[difficulty].reduce((a, b) => a * b, 1);
+  const amount = mapDifficultyToCells[difficulty].reduce(
+    (a: number, b: number) => a * b,
+    1
+  );
   const result: ICard[] = [];
   let cardIndex = 0;
 

@@ -5,10 +5,14 @@ import { FieldWrapper, Grid, ButtonWrapper } from './styles';
 import { IProps } from './types';
 import { generateField } from './utils';
 
-export const mapDifficultyToCells = {
+// Product of 2 numbers should always be the same
+export const mapDifficultyToCells: any = {
   easy: [4, 3],
-  medium: [5, 4],
-  hard: [6, 5]
+  easyMobile: [4, 3],
+  medium: [4, 4],
+  mediumMobile: [4, 4],
+  hard: [5, 4],
+  hardMobile: [4, 5]
 };
 
 // Toggle cards, etc.
