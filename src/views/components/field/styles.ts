@@ -13,20 +13,20 @@ export const Grid = styled.div`
 
     grid-gap: 15px;
     grid-template-columns: repeat(
-      ${mapDifficultyToCells[props.difficulty][0]},
+      ${mapDifficultyToCells[props.difficulty].desktop[0]},
       100px
     );
     grid-template-rows: repeat(
-      ${mapDifficultyToCells[props.difficulty][1]},
+      ${mapDifficultyToCells[props.difficulty].desktop[1]},
       100px
     );
 
     ${media.lessThan('medium')`
       grid-template-columns: repeat(${
-        mapDifficultyToCells[props.difficulty + 'Mobile'][0]
+        mapDifficultyToCells[props.difficulty].mobile[0]
       }, 75px);
       grid-template-rows: repeat(${
-        mapDifficultyToCells[props.difficulty + 'Mobile'][1]
+        mapDifficultyToCells[props.difficulty].mobile[1]
       }, 75px);
     `}
   `};

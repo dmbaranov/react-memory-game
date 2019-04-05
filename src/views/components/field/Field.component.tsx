@@ -7,12 +7,24 @@ import { generateField } from './utils';
 
 // Product of 2 numbers should always be the same
 export const mapDifficultyToCells: any = {
-  easy: [4, 3],
-  easyMobile: [4, 3],
-  medium: [4, 4],
-  mediumMobile: [4, 4],
-  hard: [5, 4],
-  hardMobile: [4, 5]
+  easy: {
+    mobile: [4, 3],
+    desktop: [4, 3],
+    amount: 12,
+    cellTypes: 6
+  },
+  medium: {
+    mobile: [4, 4],
+    desktop: [4, 4],
+    amount: 16,
+    cellTypes: 10
+  },
+  hard: {
+    mobile: [4, 5],
+    desktop: [5, 4],
+    amount: 20,
+    cellTypes: 14
+  }
 };
 
 // Toggle cards, etc.
@@ -20,7 +32,10 @@ const ACTION_TIMEOUT = 750;
 
 const Field: React.FC<IProps> = ({ difficulty, onGameStarted, onGameOver }) => {
   const createField = () => {
-    const field = generateField(difficulty);
+    const field = generateField(difficulty).map((card: any) => ({
+      ...card,
+      solved: true
+    }));
     const now = new Date().getTime();
     onGameStarted(now);
 

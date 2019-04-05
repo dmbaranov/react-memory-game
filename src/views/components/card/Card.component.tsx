@@ -38,7 +38,7 @@ const Card: React.FC<IProps> = ({
 
   const renderCard = () => {
     if (showFront) {
-      return <Front color={card.color}>{card.value}</Front>;
+      return <Front color={card.color} />;
     }
     return <Back>?</Back>;
   };
