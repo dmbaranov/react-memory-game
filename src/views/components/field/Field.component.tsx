@@ -32,10 +32,7 @@ const ACTION_TIMEOUT = 750;
 
 const Field: React.FC<IProps> = ({ difficulty, onGameStarted, onGameOver }) => {
   const createField = () => {
-    const field = generateField(difficulty).map((card: any) => ({
-      ...card,
-      solved: true
-    }));
+    const field = generateField(difficulty);
     const now = new Date().getTime();
     onGameStarted(now);
 
@@ -76,7 +73,8 @@ const Field: React.FC<IProps> = ({ difficulty, onGameStarted, onGameOver }) => {
   const checkForGameOver = () => {
     const remainingCards = field.filter(card => !card.solved);
 
-    if (remainingCards.length === 0) {
+    // TODO: not working
+    if (field.length && remainingCards.length === 0) {
       onGameOver({
         moves
       });

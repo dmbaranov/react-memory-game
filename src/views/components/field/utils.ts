@@ -61,7 +61,20 @@ const CARDS: ICard[] = [
   }
 ];
 
+function getCardsForGame(amount: number) {
+  const tempCards = [...CARDS];
+  const result = [];
+
+  for (let i = 0; i < amount; i++) {
+    const index = Math.floor(Math.random() * tempCards.length);
+    result.push(tempCards.splice(index, 1)[0]);
+  }
+
+  return result;
+}
+
 // TODO: improve it
+// TODO: create a temp array with the amount of cells in it that is equal to fieldSettings.cellTypes
 export function generateField(difficulty: GameDifficulty): ICard[] {
   // const amount = mapDifficultyToCells[difficulty].reduce(
   //   (a: number, b: number) => {
@@ -71,26 +84,29 @@ export function generateField(difficulty: GameDifficulty): ICard[] {
   //   1
   // );
   const fieldSettings = mapDifficultyToCells[difficulty];
+  const gameCards = getCardsForGame(fieldSettings.cellTypes);
   const result: ICard[] = [];
-  let cardIndex = Math.floor(Math.random() * CARDS.length);
+  let cardIndex = Math.floor(Math.random() * gameCards.length);
 
   for (let i = 0; i < fieldSettings.amount / 2; i++) {
-    result.push({ ...CARDS[cardIndex], id: i });
-    result.push({ ...CARDS[cardIndex], id: i + 1 });
+    result.push({ ...gameCards[cardIndex], id: i, solved: false });
+    result.push({ ...gameCards[cardIndex], id: i + 1, solved: false });
 
-    if (cardIndex === fieldSettings.cellTypes - 1) {
+    if (
+      cardIndex === fieldSettings.cellTypes - 1 ||
+      cardIndex > gameCards.length
+    ) {
       cardIndex = 0;
     } else {
       cardIndex++;
     }
   }
 
-  // for (let i = 0; i < result.length; i++) {
-  //   const newIndex = Math.floor(Math.random() * result.length);
-  //   [result[i], result[newIndex]] = [result[newIndex], result[i]];
-  // }
+  for (let i = 0; i < result.length; i++) {
+    const newIndex = Math.floor(Math.random() * result.length);
+    [result[i], result[newIndex]] = [result[newIndex], result[i]];
+  }
 
   console.log(result);
-
   return result;
 }
